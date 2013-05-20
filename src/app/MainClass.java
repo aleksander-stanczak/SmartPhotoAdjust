@@ -9,7 +9,8 @@ public class MainClass {
 	 */
 	public static void main(String[] args) {
 		
-		System.out.println("SmartPhotoAdjust loaded");
+		System.out.println("SmartPhotoAdjust loaded 2");
+		
 		
 		Perceptron p = new Perceptron();
 		System.out.println("Weights before training: ");
