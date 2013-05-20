@@ -1,3 +1,5 @@
+package output;
+
 import ij.*;
 import ij.process.*;
 import ij.gui.*;
@@ -22,7 +24,7 @@ public class OutputImageProccesor implements PlugInFilter {
 		h = ip.getHeight();
 		ip.invert();
 		imp.updateAndDraw();
-		IJ.wait(500);
+		IJ.wait(1500);
 		ip.invert();
 		imp.updateAndDraw();
 		getFFTMatix(argument);
@@ -33,6 +35,12 @@ public class OutputImageProccesor implements PlugInFilter {
 		picture_fft_matrix.run(arg);
 		Histogram picture_fft_histogram = new Histogram();
 		picture_fft_histogram.run(arg);
+	}
+
+	@Override
+	public void run(ij.process.ImageProcessor arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
