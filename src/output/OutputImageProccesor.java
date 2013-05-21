@@ -10,6 +10,7 @@ public class OutputImageProccesor implements PlugInFilter {
 	@SuppressWarnings("unused")
 	private ImagePlus imp;
 	private String argument;
+	private boolean result = false;
 
 	public int setup(String arg, ImagePlus imp) {
 		this.imp = imp;
@@ -21,8 +22,27 @@ public class OutputImageProccesor implements PlugInFilter {
 	public void run(ij.process.ImageProcessor ip) {
 		
 		double perc_value = getFFTMatix(argument);
+		
+		if (perc_value <0.05) {
+			result = true;
+		}
+		else if (perc_value > 1) {
+			result = true;
+		}
+		else {
+			result = false;
+		}
+		IJ.showMessage(Boolean.toString(result));
 	}
 	
+	/**
+	 * Return if there's noise or not
+	 * @return
+	 */
+	public boolean isResult() {
+		return result;
+	}
+
 /**
  * Calculate FFT matrix and calculate noise ratio
  * 
