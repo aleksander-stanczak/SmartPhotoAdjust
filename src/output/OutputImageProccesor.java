@@ -79,6 +79,9 @@ public class OutputImageProccesor implements PlugInFilter {
      	// calc low frequency percentage
      	double perc_content  = (double) Hi[1]/max_D;
      	
+     	Window_Closer Wind_Clow = new Window_Closer();
+     	Wind_Clow.run(argument);
+     	
      	return perc_content;
 	}
 
