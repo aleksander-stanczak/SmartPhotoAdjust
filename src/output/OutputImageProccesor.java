@@ -23,7 +23,7 @@ public class OutputImageProccesor implements PlugInFilter {
 		
 		double perc_value = getFFTMatix(argument);
 		
-		if (perc_value <0.05) {
+		if (perc_value <0.09) {
 			result = true;
 		}
 		else if (perc_value > 1) {
