@@ -9,9 +9,9 @@ public class MainClass {
 	 */
 	public static void main(String[] args) {
 		
-		System.out.println("Upload test - Hello Mateo! ;)");
-
-		System.out.println("App start");
+		System.out.println("SmartPhotoAdjust loaded 2");
+		
+		
 		Perceptron p = new Perceptron();
 		System.out.println("Weights before training: ");
 		p.printMatrix(p.weights);
