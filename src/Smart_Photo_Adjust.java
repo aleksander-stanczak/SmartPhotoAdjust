@@ -13,8 +13,8 @@ public class Smart_Photo_Adjust implements PlugIn {
 	public void run(String arg) {
 		
 		// variables
-		int[] inputVector = null;
-		int[] outputVector = null;
+		boolean[] inputVector = null;
+		boolean[] outputVector = null;
 		
 		/////
 		// find inputVector - information about unprocessed image 
