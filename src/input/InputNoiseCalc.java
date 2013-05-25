@@ -6,7 +6,7 @@ import ij.plugin.filter.*;
 import ij.plugin.FFT;
 import ij.WindowManager;
 
-public class InpuNoiseCalc implements PlugInFilter {
+public class InputNoiseCalc implements PlugInFilter {
 	@SuppressWarnings("unused")
 	private ImagePlus imp;
 	private String argument;

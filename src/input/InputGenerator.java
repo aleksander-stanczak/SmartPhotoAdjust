@@ -7,7 +7,7 @@ public class InputGenerator {
 		// gather info about image like contrast, histogram etc.
 		boolean[] imageInfo = {false,false,false,false};
 		
-		InpuNoiseCalc inc = new InpuNoiseCalc();
+		InputNoiseCalc inc = new InputNoiseCalc();
 		
 		//inc.run(ip);
 		//imageInfo[0] = inc.isResult();

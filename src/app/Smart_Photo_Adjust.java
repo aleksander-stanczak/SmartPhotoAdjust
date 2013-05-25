@@ -1,3 +1,4 @@
+package app;
 import ij.*;
 import ij.process.*;
 import ij.gui.*;
