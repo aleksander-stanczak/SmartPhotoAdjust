@@ -1,10 +1,11 @@
-package output;
+package input;
 
+import output.Window_Closer;
 import ij.*;
 import ij.plugin.filter.*;
 import ij.WindowManager;
 
-public class OutputBlurredProccessor implements PlugInFilter {
+public class InputBlurredCalc implements PlugInFilter {
 	ImagePlus imp;
 	
 	private boolean result = false;

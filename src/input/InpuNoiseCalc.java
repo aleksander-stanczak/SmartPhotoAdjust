@@ -1,12 +1,12 @@
-package output;
+package input;
 
+import output.Window_Closer;
 import ij.*;
 import ij.plugin.filter.*;
 import ij.plugin.FFT;
 import ij.WindowManager;
 
-
-public class OutputImageProccesor implements PlugInFilter {
+public class InpuNoiseCalc implements PlugInFilter {
 	@SuppressWarnings("unused")
 	private ImagePlus imp;
 	private String argument;
