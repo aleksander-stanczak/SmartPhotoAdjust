@@ -86,6 +86,7 @@ public class InputBlurredCalc implements PlugInFilter {
 	
 	/**
 	 * Return if there's blurred or not
+	 * 
 	 * @return
 	 */
 	public boolean isResult() {

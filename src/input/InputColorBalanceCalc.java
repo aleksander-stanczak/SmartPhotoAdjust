@@ -28,7 +28,7 @@ public class InputColorBalanceCalc implements PlugInFilter {
 	/**
 	 * Calculate if Color Balance is needed
 	 * 
-	 * @param	arg0		image that will be marked
+	 * @param	ip		image that will be marked
 	 * @return			if blurred image
 	 */
 	private boolean calulateColorBalance(ij.process.ImageProcessor ip) {
@@ -114,6 +114,7 @@ public class InputColorBalanceCalc implements PlugInFilter {
 	
 	/**
 	 * Return if there's need to change ColorBalance or not
+	 * 
 	 * @return
 	 */
 	public boolean isResult() {

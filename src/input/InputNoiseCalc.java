@@ -37,6 +37,7 @@ public class InputNoiseCalc implements PlugInFilter {
 	
 	/**
 	 * Return if there's noise or not
+	 * 
 	 * @return
 	 */
 	public boolean isResult() {

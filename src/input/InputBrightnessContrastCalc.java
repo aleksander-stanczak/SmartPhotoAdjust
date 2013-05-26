@@ -28,7 +28,7 @@ public class InputBrightnessContrastCalc implements PlugInFilter {
 	/**
 	 * Calculate if Color Brightness and Contrast need to by change
 	 * 
-	 * @param	arg0		image that will be marked
+	 * @param	ip		image that will be marked
 	 * @return			if blurred image
 	 */
 	private boolean calulateBrightnessContrast(ij.process.ImageProcessor ip) {
@@ -93,6 +93,7 @@ public class InputBrightnessContrastCalc implements PlugInFilter {
 
 	/**
 	 * Return if there's need to change Brightness and Contrast or not
+	 * 
 	 * @return
 	 */
 	public boolean isResult() {
