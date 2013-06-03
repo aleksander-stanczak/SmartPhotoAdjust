@@ -19,7 +19,7 @@ public class MainClass {
 		System.out.println("Weights after training: ");
 		p.printMatrix(p.weights);
 		
-		
+		System.out.println("HERE");
 		System.out.println("SmartPhotoAdjust closed");
 
 	}

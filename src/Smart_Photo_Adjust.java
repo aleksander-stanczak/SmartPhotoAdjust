@@ -13,6 +13,8 @@ import ij.plugin.*;
 import ij.plugin.filter.PlugInFilter;
 import ij.plugin.frame.*;
 import input.InputGenerator;
+import ij.io.Opener;
+import ij.process.ImageProcessor;
 
 public class Smart_Photo_Adjust implements PlugInFilter {
 
@@ -28,8 +30,14 @@ public class Smart_Photo_Adjust implements PlugInFilter {
 		/////
 		// find inputVector - information about unprocessed image 
 		
-		inputVector = InputGenerator.getInputVector();
+		Opener opener = new Opener();  
+		String imageFilePath = "C:\\Users\\Itryi\\Mateusz\\Studia\\mgr_semestr3\\CPOO\\Projekt\\rozmazane\\zdj_cie0108.jpeg";
+		ImagePlus imp = opener.openImage(imageFilePath);
+		ImageProcessor ip1 = imp.getProcessor();
 		
+		inputVector = InputGenerator.getInputVector(ip1);
+		
+		System.out.println("HERE");
 		/////
 		
 		/////
@@ -52,7 +60,7 @@ public class Smart_Photo_Adjust implements PlugInFilter {
 		hef.run(ip);*/
 		OutputSaturationFilter sf = new OutputSaturationFilter();
 		sf.setup(null, raw_image);
-		sf.run(ip);
+		sf.run(ip1);
 		
 		
 		/////

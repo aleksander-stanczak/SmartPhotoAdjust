@@ -2,10 +2,10 @@ package input;
 
 public class InputGenerator {
 	
-	static public boolean[] getInputVector(){
+	static public boolean[] getInputVector(ij.process.ImageProcessor ip){
 		
 		// gather info about image like contrast, histogram etc.
-		boolean[] imageInfo = {false,false,false,false,false};
+		boolean[] imageInfo = {false,false, false, false, false};
 		
 		InputNoiseCalc inc = new InputNoiseCalc();
 		InputBlurredCalc ibc = new InputBlurredCalc();
@@ -13,19 +13,19 @@ public class InputGenerator {
 		InputColorBalanceCalc icbc = new InputColorBalanceCalc();
 		InputBrightnessContrastCalc ibcc = new InputBrightnessContrastCalc();
 		
-		//inc.run(ip);
+		inc.run(ip);
 		imageInfo[0] = inc.isResult();
 		
-		//icbc.run(ip);
+		icbc.run(ip);
 		imageInfo[1] = icbc.isResult();
 		
-		//ibcc.run(ip);
+		ibcc.run(ip);
 		imageInfo[2] = ibcc.isResult();
 		
-		//ihsc.run(ip);
+		ihsc.run(ip);
 		imageInfo[3] = ihsc.isResult();
 		
-		//ibc.run(ip);
+		ibc.run(ip);
 		imageInfo[4] = ibc.isResult();
 		
 		return imageInfo;
