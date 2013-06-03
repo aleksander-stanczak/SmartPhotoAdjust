@@ -1,4 +1,4 @@
-package app;
+
 import ij.*;
 import ij.process.*;
 import ij.gui.*;
@@ -6,6 +6,7 @@ import java.awt.*;
 
 import output.OutputGammaFilter;
 import output.OutputHistogramEqualizationFilter;
+import output.OutputSaturationFilter;
 
 import neural_networks.Perceptron;
 import ij.plugin.*;
@@ -46,14 +47,17 @@ public class Smart_Photo_Adjust implements PlugInFilter {
 		/*OutputGammaFilter gf = new OutputGammaFilter();
 		gf.setup("0", raw_image);
 		gf.run(ip);*/
-		OutputHistogramEqualizationFilter hef = new OutputHistogramEqualizationFilter();
+		/*OutputHistogramEqualizationFilter hef = new OutputHistogramEqualizationFilter();
 		hef.setup(null, raw_image);
-		hef.run(ip);
+		hef.run(ip);*/
+		OutputSaturationFilter sf = new OutputSaturationFilter();
+		sf.setup(null, raw_image);
+		sf.run(ip);
 		
 		
 		/////
 		
-		IJ.showMessage("Smart Photo Adjust Plugin","Automatic photo adjust conducted succesfully!");
+		//IJ.showMessage("Smart Photo Adjust Plugin","Automatic photo adjust conducted succesfully!");
 		
 	}
 
@@ -63,7 +67,7 @@ public class Smart_Photo_Adjust implements PlugInFilter {
 		
 		raw_image = imp;
 		
-		return 0;
+		return DOES_ALL;
 	}
 	
 	
