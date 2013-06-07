@@ -18,7 +18,7 @@ public class OutputImageProcessor {
 
 	public void processImage(int[] processingParams){
 		
-		// first bit despeckle or not (if noise)
+		// 1st bit despeckle or not (if noise)
 		if ( processingParams[0] == 1 ){
 			// despeckle
 			OutputDespeckleFilter df = new OutputDespeckleFilter();
@@ -26,7 +26,7 @@ public class OutputImageProcessor {
 			df.run(ip);
 		}
 		
-		// second bit sharpen or not (if blurred)
+		// 2nd bit sharpen or not (if blurred)
 		if ( processingParams[1] == 1 ){
 			// despeckle
 			OutputSharpenFilter sf = new OutputSharpenFilter();
@@ -34,9 +34,33 @@ public class OutputImageProcessor {
 			sf.run(ip);
 		}
 		
-		// 3rd & 4th bit gamma filter correction 
-		// {0 - no correction; 1 - increase gamma; 2 - decrease gamma}
-		System.out.println(processingParams[2]+""+processingParams[3]);
+		// 3rd bit equalize histogram or not (if something in contrast or lighting is wrong)
+		if ( processingParams[2] == 1 ){
+			// equalize histogram
+			OutputHistogramEqualizationFilter hef = new OutputHistogramEqualizationFilter();
+			hef.setup("1", img);
+			hef.run(ip);
+		}
+		
+		// 4th & 5th bit gamma filter correction 
+		// {1 - no correction; 0 - decrease gamma; 2 - increase gamma}
+		if ( processingParams[3]+processingParams[4] != 1 ){
+			// despeckle
+			OutputGammaFilter gf = new OutputGammaFilter();
+			gf.setup(String.valueOf(processingParams[3]+processingParams[4]), img);
+			gf.run(ip);
+		
+		}
+		
+		// 6th & 7th bit saturation correction
+		// {1 - no correction; 0 - decrease saturation; 2 - increase saturation}
+		if ( processingParams[5]+processingParams[6] != 1 ){
+			// correct gamma
+			OutputSaturationFilter sf = new OutputSaturationFilter();
+			sf.setup(String.valueOf(processingParams[5]+processingParams[6]), img);
+			sf.run(ip);
+		
+		}
 	}
 
 }

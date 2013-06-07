@@ -15,7 +15,10 @@ public class OutputSaturationFilter implements PlugInFilter{
 	
 	ImagePlus imp;
 	private  final static int OPAQUE = 0xFF000000;
-	private float saturation = 0.2f;
+	private static final float INCREASE_SATURATION = 1.2f;
+	private static final float DECREASE_SATURATION = 0.8f;
+	
+	private float saturation = 1;
 	private int brightness = 0;
 	private float contrast = 1;
 	private float hueChange = 0;
@@ -169,7 +172,6 @@ public class OutputSaturationFilter implements PlugInFilter{
 			pixels[i] = c;		
 		}
 		
-		IJ.showMessage("Debug: "+pixels[100]);
 		
 //		memoryImageSource = new MemoryImageSource(width, height, pixels, 0, width);
 //
@@ -233,13 +235,24 @@ public class OutputSaturationFilter implements PlugInFilter{
 		*/
 		
 		//imp.updateAndDraw();
-		IJ.showMessage("Saturation update conducted succesfully!");
+		if ( saturation != 1 )
+			IJ.showMessage("Saturation update by "+saturation+" conducted succesfully!");
 	}
 
 	@Override
 	public int setup(String arg, ImagePlus imp) {
 		
-		//TO DO
+		switch (Integer.valueOf(arg)) {
+		case 0:
+			saturation = DECREASE_SATURATION;
+			break;
+		case 2:
+			saturation = INCREASE_SATURATION;
+			break;
+		default:
+			saturation = 1;
+			break;
+		}
 		
 		this.imp = imp;
 		return DOES_ALL;

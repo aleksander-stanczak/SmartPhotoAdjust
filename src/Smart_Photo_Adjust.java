@@ -31,21 +31,21 @@ public class Smart_Photo_Adjust implements PlugInFilter {
 		/////
 		// find inputVector - information about unprocessed image 
 		
-		Opener opener = new Opener();  
+		/*Opener opener = new Opener();  
 		String imageFilePath = "C:\\Users\\Itryi\\Mateusz\\Studia\\mgr_semestr3\\CPOO\\Projekt\\rozmazane\\zdj_cie0108.jpeg";
 		ImagePlus imp = opener.openImage(imageFilePath);
 		ImageProcessor ip1 = imp.getProcessor();
 		
 		inputVector = InputGenerator.getInputVector(ip1);
 		
-		System.out.println("HERE");
+		System.out.println("HERE");*/
 		/////
 		
 		/////
 		// process by neural network and suggest adjustments (as outputVector)
 		
 		
-		Perceptron p = new Perceptron();
+		//Perceptron p = new Perceptron();
 		//outputVector = p.getNetworkOutput(inputVector);
 		/////
 		
@@ -63,8 +63,11 @@ public class Smart_Photo_Adjust implements PlugInFilter {
 		sf.setup(null, raw_image);
 		sf.run(ip1);*/
 		
+		
 		// test output filter corrections
-		int[] processingParams = {0101};
+		// bits:		1/1/1/11/11									= 7 bits of output data
+		// operations:	despeckle/sharpen/eq. hist./gamma/satur.	= 5 operations
+		int[] processingParams = {1,1,1,1,1,1,1};
 		
 		OutputImageProcessor outputProcessor = new OutputImageProcessor(raw_image,ip);
 		outputProcessor.processImage(processingParams);

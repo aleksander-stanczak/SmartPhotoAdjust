@@ -17,7 +17,9 @@ public class OutputGammaFilter implements PlugInFilter {
 		
 		ip.gamma(gamma_factor);
 		imp.updateAndDraw();
-		IJ.showMessage("Gamma update conducted succesfully!");
+		
+		if ( gamma_factor != 1 )
+			IJ.showMessage("Gamma update by "+gamma_factor+" conducted succesfully!");
 	}
 
 	@Override

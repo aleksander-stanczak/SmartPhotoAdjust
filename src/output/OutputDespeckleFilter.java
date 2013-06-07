@@ -18,7 +18,7 @@ public class OutputDespeckleFilter implements PlugInFilter {
 		
 		ip.medianFilter();
 		imp.updateAndDraw();
-		IJ.showMessage("Blur conducted succesfully!");
+		IJ.showMessage("Despeckle conducted succesfully!");
 	}
 
 	@Override
