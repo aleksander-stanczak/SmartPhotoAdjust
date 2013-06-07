@@ -7,38 +7,56 @@ import java.util.Random;
 
 
 public class Perceptron {
-
-	int numberOfInputNeurons = 3;
-	int numberOfOutputNeurons = 1;
 	
-	final double MSE = 1.5;
-	final double LEARNING_FACTOR = 0.001;
+	final double MSE = 0.001;
+	final double LEARNING_FACTOR = 0.01;
 	final int MAX_ITERATIONS = (int) 10e6;
 	
 	public double final_mse=0;
 	
 	public double[][] weights;
 	
-	double[][] patterns = { 
-		    { 7.2, 11, 6 }, 
-		    { 4, 1, 2 }, 
-		    { 2, 7, 3 }
-		    };
+	int[][] patterns = { 
+		    { 0, 0, 0, 0 }, 
+		    { 0, 0, 0, 1 }, 
+		    { 0, 0, 1, 0 },
+		    { 0, 0, 1, 1 }, 
+		    { 0, 1, 0, 0 }, 
+		    { 0, 1, 0, 1 }, 
+		    { 0, 1, 1, 0 },
+		    { 0, 1, 1, 1 }, 
+		    { 1, 0, 0, 0 }, 
+		    { 1, 0, 0, 1 } };
 	
-	double[][] teachingOutput = { 
-		    { 34.55 },
-		    { 120.55 }, 
-		    { 122.43 }};
+	int[][] teachingOutput = { 
+		    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+		    { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
+		    { 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
+		    { 1, 1, 1, 0, 0, 0, 0, 0, 0, 0 }, 
+		    { 1, 1, 1, 1, 0, 0, 0, 0, 0, 0 },
+		    { 1, 1, 1, 1, 1, 0, 0, 0, 0, 0 }, 
+		    { 1, 1, 1, 1, 1, 1, 0, 0, 0, 0 },
+		    { 1, 1, 1, 1, 1, 1, 1, 0, 0, 0 }, 
+		    { 1, 1, 1, 1, 1, 1, 1, 1, 0, 0 },
+		    { 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 } };
 	
-	int numberOfPatterns = 3;
+	
+	int numberOfInputNeurons = patterns[0].length;
+	int numberOfOutputNeurons = teachingOutput[0].length;
+	
+	int numberOfPatterns = patterns.length;
 	
 	public Perceptron() {
 
+		System.out.println(numberOfInputNeurons);
+		System.out.println(numberOfOutputNeurons);
+		System.out.println(numberOfPatterns);
+		
 	    weights = new double[numberOfInputNeurons][numberOfOutputNeurons];
 	    
 	}
 	
-	public Perceptron(double[][] inputData, double[][] outputData) {
+	public Perceptron(int[][] inputData, int[][] outputData) {
 
 	    weights = new double[numberOfInputNeurons][numberOfOutputNeurons];
 	    
@@ -46,14 +64,9 @@ public class Perceptron {
 	    teachingOutput = outputData;
 	    
 	    numberOfPatterns = patterns.length;
-	    //numberOfInputNeurons = patterns[0].length;
-		
-	    //numberOfOutputNeurons = teachingOutput[0].length;
 
 	}
 	
-	
-	///////////////////////////////
 	
 	public void deltaRule() {
 		int iteratons = 0;
@@ -65,7 +78,7 @@ public class Perceptron {
 		
 		
 		
-		while (mse_error > MSE && delta > Double.MIN_VALUE*10 && iteratons < MAX_ITERATIONS) {
+		while (mse_error > MSE && /*delta > Double.MIN_VALUE*10 &&*/ iteratons < MAX_ITERATIONS) {
 			
 			old_mse = mse_error;
 			
@@ -76,7 +89,7 @@ public class Perceptron {
 			// over patterns
 			for (int i = 0; i < numberOfPatterns; i++) {
 				
-				double[] output = setOutputValues(i);
+				int[] output = setOutputValues(i);
 				
 				// over output
 				for (int j = 0; j < numberOfOutputNeurons; j++) {
@@ -111,7 +124,7 @@ public class Perceptron {
 		double mse_error = 0;
 		
 		for (int i = 0; i < numberOfPatterns; i++){
-			double[] output = setOutputValues(i);
+			int[] output = setOutputValues(i);
 			
 			mse_error += /*Math.sqrt(*/(output[0] - teachingOutput[i][0])*(output[0] - teachingOutput[i][0])/*)*/;
 
@@ -121,33 +134,44 @@ public class Perceptron {
 		return mse_error;
 	}
 	
-	double[] setOutputValues(int patternNo) {
+	int[] setOutputValues(int patternNo) {
 		
 		double bias = 0.7;
-		double[] result = new double[numberOfOutputNeurons];
-		double[] toImpress = patterns[patternNo];
+		int[] result = new int[numberOfOutputNeurons];
+		int[] toImpress = patterns[patternNo];
 		
 		double net=0;
 		
-		for (int i = 0; i < toImpress.length; i++) {
+/*		for (int i = 0; i < toImpress.length; i++) {
 			for (int j = 0; j < result.length; j++) {
 			    net = weights[0][j] * toImpress[0] + weights[1][j]
 			            * toImpress[1] + weights[2][j] * toImpress[2];
-			    /*if (net > bias)
+			    if (net > bias)
 			        result[j] = 1;
 			    else
-			        result[j] = 0;*/
+			        result[j] = 0;
 			    
 			    //net = net*(1/(1+Math.exp(net)));
 			    
-			    result[j] = net;
+			    //result[j] = net;
 			}
+			
+		}*/
+		
+		for (int j = 0; j < result.length; j++) {
+		    net = 0;
+		    for (int i = 0; i < toImpress.length; i++)
+		        net += weights[i][j] * toImpress[i];
+		    if (net > bias)
+		        result[j] = 1;
+		    else
+		        result[j] = 0;
 		}
 		
 		return result;
 	}
 	
-	public double getNetworkOutput(int[] inputVector) {
+/*	public double getNetworkOutput(int[] inputVector) {
 		
 		double bias = 0.7;
 
@@ -161,7 +185,7 @@ public class Perceptron {
 		return output;
 	}
 	// TEST 11
-	
+*/	
 	public void printMatrix(double[][] matrix) {
 		
 		for (int i = 0; i < matrix.length; i++) {
@@ -180,6 +204,17 @@ public class Perceptron {
 	
 	public static int returnInt(){
 		return 666;
+	}
+	
+	public static void main(String[] args) {
+		
+		Perceptron p = new Perceptron();
+		System.out.println("Weights before training: ");
+		p.printMatrix(p.weights);
+		p.deltaRule();
+		System.out.println("Weights after training: ");
+		p.printMatrix(p.weights);
+		
 	}
 	
 }
