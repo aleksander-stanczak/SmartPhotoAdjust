@@ -67,7 +67,8 @@ public class Smart_Photo_Adjust implements PlugInFilter {
 		// test output filter corrections
 		// bits:		1/1/1/11/11									= 7 bits of output data
 		// operations:	despeckle/sharpen/eq. hist./gamma/satur.	= 5 operations
-		int[] processingParams = {1,1,1,1,1,1,1};
+		//int[] processingParams = {1,1,1,1,1,1,1};
+		int[] processingParams = {0,0,0,0,0,1,1};
 		
 		OutputImageProcessor outputProcessor = new OutputImageProcessor(raw_image,ip);
 		outputProcessor.processImage(processingParams);
