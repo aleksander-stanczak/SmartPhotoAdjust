@@ -6,6 +6,7 @@ import java.awt.*;
 
 import output.OutputGammaFilter;
 import output.OutputHistogramEqualizationFilter;
+import output.OutputImageProcessor;
 import output.OutputSaturationFilter;
 
 import neural_networks.Perceptron;
@@ -58,9 +59,15 @@ public class Smart_Photo_Adjust implements PlugInFilter {
 		/*OutputHistogramEqualizationFilter hef = new OutputHistogramEqualizationFilter();
 		hef.setup(null, raw_image);
 		hef.run(ip);*/
-		OutputSaturationFilter sf = new OutputSaturationFilter();
+		/*OutputSaturationFilter sf = new OutputSaturationFilter();
 		sf.setup(null, raw_image);
-		sf.run(ip1);
+		sf.run(ip1);*/
+		
+		// test output filter corrections
+		int[] processingParams = {0101};
+		
+		OutputImageProcessor outputProcessor = new OutputImageProcessor(raw_image,ip);
+		outputProcessor.processImage(processingParams);
 		
 		
 		/////
