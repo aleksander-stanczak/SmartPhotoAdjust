@@ -25,8 +25,8 @@ public class Smart_Photo_Adjust implements PlugInFilter {
 	public void run(ImageProcessor ip) {
 		
 		// variables
-		boolean[] inputVector = null;
-		boolean[] outputVector = null;
+		int[] inputVector = null;
+		int[] outputVector = null;
 		
 		/////
 		// find inputVector - information about unprocessed image 
@@ -44,39 +44,38 @@ public class Smart_Photo_Adjust implements PlugInFilter {
 		/////
 		// process by neural network and suggest adjustments (as outputVector)
 		
-		
+		// OPTION 1: default perceptron, learned from exemplary data inside it
 		//Perceptron p = new Perceptron();
-		//outputVector = p.getNetworkOutput(inputVector);
-		/////
+		//p.deltaRule();
+		//--------------
+		
+		int[][] inputTrainingVector = null;
+		int[][] outputTrainingVector = null;
+		// OPTION 2: teach perceptron from outer class
+		Perceptron p = new Perceptron(inputTrainingVector, outputTrainingVector);
+		p.deltaRule();
+		// -------------
+		
+		// use network to calculate output operations
+		outputVector = p.getNetworkOutput(inputVector);
 		
 		/////
-		// adjust image
-		
-		// Brighting image with use of gamma correction
-		/*OutputGammaFilter gf = new OutputGammaFilter();
-		gf.setup("0", raw_image);
-		gf.run(ip);*/
-		/*OutputHistogramEqualizationFilter hef = new OutputHistogramEqualizationFilter();
-		hef.setup(null, raw_image);
-		hef.run(ip);*/
-		/*OutputSaturationFilter sf = new OutputSaturationFilter();
-		sf.setup(null, raw_image);
-		sf.run(ip1);*/
+		// adjust image according to neural network
 		
 		
 		// test output filter corrections
 		// bits:		1/1/1/11/11									= 7 bits of output data
 		// operations:	despeckle/sharpen/eq. hist./gamma/satur.	= 5 operations
+		// exemplary output vectors (normally should be outputVector):
 		//int[] processingParams = {1,1,1,1,1,1,1};
-		int[] processingParams = {0,0,0,0,0,1,1};
+		int[] processingParams = {0,1,0,0,0,1,1};
 		
+		// processing image basing on output data
 		OutputImageProcessor outputProcessor = new OutputImageProcessor(raw_image,ip);
 		outputProcessor.processImage(processingParams);
 		
 		
-		/////
-		
-		//IJ.showMessage("Smart Photo Adjust Plugin","Automatic photo adjust conducted succesfully!");
+		IJ.showMessage("Smart Photo Adjust Plugin","Automatic photo adjust conducted succesfully!");
 		
 	}
 

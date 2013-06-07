@@ -5,10 +5,9 @@ import java.text.NumberFormat;
 import java.util.Random;
 
 
-
 public class Perceptron {
 	
-	final double MSE = 0.001;
+	final double MSE = 0.01;
 	final double LEARNING_FACTOR = 0.01;
 	final int MAX_ITERATIONS = (int) 10e6;
 	
@@ -76,16 +75,13 @@ public class Perceptron {
 		double delta = Double.MAX_VALUE;
 		double old_mse = 0;
 		
-		
-		
+				
 		while (mse_error > MSE && /*delta > Double.MIN_VALUE*10 &&*/ iteratons < MAX_ITERATIONS) {
 			
 			old_mse = mse_error;
 			
 			iteratons++;
-			
-			
-			
+						
 			// over patterns
 			for (int i = 0; i < numberOfPatterns; i++) {
 				
@@ -100,7 +96,6 @@ public class Perceptron {
 				            weights[k][j] = weights[k][j] + learningFactor
 				                    * patterns[i][k]
 				                    * (teachingOutput[i][j] - output[j]);
-
 				        }
 				}
 				
@@ -142,22 +137,6 @@ public class Perceptron {
 		
 		double net=0;
 		
-/*		for (int i = 0; i < toImpress.length; i++) {
-			for (int j = 0; j < result.length; j++) {
-			    net = weights[0][j] * toImpress[0] + weights[1][j]
-			            * toImpress[1] + weights[2][j] * toImpress[2];
-			    if (net > bias)
-			        result[j] = 1;
-			    else
-			        result[j] = 0;
-			    
-			    //net = net*(1/(1+Math.exp(net)));
-			    
-			    //result[j] = net;
-			}
-			
-		}*/
-		
 		for (int j = 0; j < result.length; j++) {
 		    net = 0;
 		    for (int i = 0; i < toImpress.length; i++)
@@ -167,25 +146,33 @@ public class Perceptron {
 		    else
 		        result[j] = 0;
 		}
+		//net = net*(1/(1+Math.exp(net)));
 		
 		return result;
 	}
 	
-/*	public double getNetworkOutput(int[] inputVector) {
+	public int[] getNetworkOutput(final int[] inputVector) {
 		
 		double bias = 0.7;
-
-		double output=0;
+		int[] output = new int[numberOfOutputNeurons];
+		int[] toImpress = inputVector;
 		
-		for (int i = 0; i < inputVector.length; i++) {
-				
-				output += weights[i][0]*inputVector[i];
-
+		double net=0;
+		
+		for (int j = 0; j < output.length; j++) {
+		    net = 0;
+		    for (int i = 0; i < toImpress.length; i++)
+		        net += weights[i][j] * toImpress[i];
+		    if (net > bias)
+		        output[j] = 1;
+		    else
+		        output[j] = 0;
 		}
+		//net = net*(1/(1+Math.exp(net)));
+		
 		return output;
 	}
-	// TEST 11
-*/	
+	
 	public void printMatrix(double[][] matrix) {
 		
 		for (int i = 0; i < matrix.length; i++) {
